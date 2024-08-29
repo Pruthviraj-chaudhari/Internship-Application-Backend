@@ -3,6 +3,7 @@ package com.example.course.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.course.CourseInstanceModel;
 import com.example.course.Entity.CourseData;
 import com.example.course.Entity.CourseInstance;
 import com.example.course.repository.CourseInstanceRepo;
@@ -65,5 +66,18 @@ public class CourseService {
         if (instance != null) {
             courseInstanceRepository.delete(instance);
         }
+    }
+    
+    public void AddCourseInstance(CourseInstanceModel courseInstanceModel) {
+    CourseData course = courseDataRepository.findById(courseInstanceModel.getId()).orElse(null);
+    
+    if(course!=null) {
+        CourseInstance courseInstance=new CourseInstance();
+        courseInstance.setCourse(course);
+        courseInstance.setYear(courseInstanceModel.getYear());
+        courseInstance.setSemester(courseInstanceModel.getSemester());
+        courseInstanceRepository.save(courseInstance);
+    }
+
     }
 }

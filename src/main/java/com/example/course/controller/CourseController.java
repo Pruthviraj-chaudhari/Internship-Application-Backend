@@ -1,6 +1,7 @@
 package com.example.course.controller;
 
 
+import com.example.course.CourseInstanceModel;
 import com.example.course.Entity.CourseData;
 import com.example.course.Entity.CourseInstance;
 import com.example.course.service.CourseService;
@@ -68,6 +69,13 @@ public class CourseController {
     public void deleteCourseInstance(
             @PathVariable int year, @PathVariable int semester, @PathVariable int courseId) {
         courseService.deleteCourseInstance(year, semester, courseId);
+    }
+    
+    
+    @PostMapping("/newInstance")
+    public CourseInstanceModel AddInstance(@RequestBody CourseInstanceModel model) {
+    courseService.AddCourseInstance(model);
+    	return model;
     }
 }
 
